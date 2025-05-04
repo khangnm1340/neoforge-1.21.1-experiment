@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "pamtutorialmod:block/bismuth_ore"
+  }
+}

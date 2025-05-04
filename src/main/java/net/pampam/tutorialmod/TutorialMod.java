@@ -33,6 +33,9 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.pampam.tutorialmod.block.ModBlocks;
+import net.pampam.tutorialmod.item.ModCreativeModeTabs;
+import net.pampam.tutorialmod.item.ModItems;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(TutorialMod.MOD_ID)
@@ -55,6 +58,11 @@ public class TutorialMod {
             // this class, like onServerStarting() below.
             NeoForge.EVENT_BUS.register(this);
 
+            ModCreativeModeTabs.register(modEventBus);
+
+            ModItems.register(modEventBus);
+            ModBlocks.register(modEventBus);
+
             // Register the item to a creative tab
             modEventBus.addListener(this::addCreative);
 
@@ -69,6 +77,16 @@ public class TutorialMod {
 
       // Add the example block item to the building blocks tab
       private void addCreative(BuildCreativeModeTabContentsEvent event) {
+            if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+                  event.accept(ModItems.DITTO);
+                  event.accept(ModItems.BISMUTH);
+                  event.accept(ModItems.RAW_BISMUTH);
+            }
+
+            if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+                  event.accept(ModBlocks.BISMUTH_BLOCK);
+                  event.accept(ModBlocks.BISMUTH_ORE);
+            }
 
       }
 
